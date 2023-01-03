@@ -1,0 +1,244 @@
+# !/usr/bin/python3
+
+import tkinter as tk
+from tkinter import ttk
+from collections import defaultdict as d
+from PIL import ImageTk, Image
+import glob
+import os
+from datetime import datetime
+import RPi.GPIO as GPIO
+import sys
+from colour import Color
+import matplotlib.pyplot as pd
+import matplotlib.dates as md
+import matplotlib
+
+matplotlib.use("Agg")
+
+red = Color("blue")
+colors = list(red.range_to(Color("red"), 11))
+
+
+def date_diff_inSeconds(dt2, dt1):
+    timedelta = dt2 - dt1
+    return timedelta.days*24*3600+timedelta.seconds
+
+
+def posval(x, y):
+    return x.index(min(x, key=lambda X: abs(X-y)))
+
+
+def TemperaturMessung(X):
+    f = open(X, 'r')
+    lines = f.readlines()
+    f.close()
+    return lines
+
+
+def TemperaturAuswertung(X):
+    lines = TemperaturMessung(X)
+    while (lines[0].strip()[-3:] != 'YES'):
+        lines = TemperaturMessung(X)
+    equals_pos = lines[1].find('t=')
+    if equals_pos != -1:
+        temp_string = lines[1][equals_pos+2:]
+        temp_c = float(temp_string) / 1000.0
+        return temp_c
+
+
+def runTemp():
+    global TR
+    global colors
+    global TO
+    global panel2
+    global TIME
+    # Print temperature to console
+    vals = []
+    vals.append(list(range(int(MIN.get())-5, int(MIN.get())+6)))
+    vals.append(list(range(int((int(MAX.get())+int(MIN.get()))/2) -
+                5, int((int(MAX.get())+int(MIN.get()))/2)+6)))
+    vals.append(list(range(int(MAX.get())-5, int(MAX.get())+6)))
+
+    DT = datetime.now().strftime("%d/%m/%Y,%H:%M:%S")
+    DT2 = datetime.now()
+    TV = []
+    for i in range(len(devices)):
+        device_file = devices[i] + '/w1_slave'
+        Temp = TemperaturAuswertung(device_file)
+        COL = colors[posval(vals[i], Temp)]
+        TIME[i].append(Temp)
+        TE[i].configure(text=str(Temp)+"C", bg=COL)
+        TV.append(Temp)
+    TO.write("\t".join([str(X) for X in TV])+"\t"+DT+"\n")
+    TIME[-1].append(DT2)
+    TT = [date_diff_inSeconds(x, min(TIME[-1]))/60 for x in TIME[-1]]
+    pd.figure(figsize=(10, 2))
+    pd.plot(TT, TIME[0], color="blue", scalex=True)
+    pd.plot(TT, TIME[1], color="green", scalex=True)
+    pd.plot(TT, TIME[2], color="red", scalex=True)
+    pd.savefig(Out.get()+"/temp.png")
+    pd.close()
+    imgT = Image.open(Out.get()+"/temp.png")
+    render2 = ImageTk.PhotoImage(imgT)
+    if panel2 == "":
+        panel2 = tk.Label(master, image=render2)
+        panel2.image = render2
+        panel2.grid(row=11, columnspan=3)
+    else:
+        panel2.configure(image=render2)
+        panel2.image = render2
+    TR = master.after(int(e1.get())*1000, runTemp)
+
+
+def runImage():
+    global IR
+    global panel
+    DT = datetime.now().strftime("%d-%m-%Y_%H-%M-%S")
+    # print("image",DT)
+    IR = master.after(int(e2.get())*1000, runImage)
+    os.system("raspistill -n -o "+Out.get()+"/"+DT+".jpg")
+    img = Image.open(Out.get()+"/"+DT+".jpg")
+    img = img.resize((640, 480))
+    render = ImageTk.PhotoImage(img)
+    if panel == "":
+        panel = tk.Label(master, image=render)
+        panel.image = render
+        panel.grid(row=12, columnspan=3)
+    else:
+        panel.configure(image=render)
+        panel.image = render
+
+
+def startimage(force=True):
+    if not os.path.exists(Out.get()):
+        os.system("mkdir -p "+Out.get())
+    P.configure(foreground="green", state=tk.DISABLED)
+    runImage()
+
+
+def starttemp():
+    global TO
+    if not os.path.exists(Out.get()):
+        os.system("mkdir -p "+Out.get())
+    TO = open(str(Out.get())+"/"+DT2+"_temp.txt", "w")
+    M.configure(foreground="green", state=tk.DISABLED)
+    runTemp()
+
+
+def stop():
+    global IR
+    global TR
+    try:
+        if TR is not None:
+            master.after_cancel(TR)
+            TR = None
+            os.system("mv "+Out.get()+"/temp.png "+Out.get() +
+                      "/Temp-Distribution_"+DT2+".png")
+            TO.close()
+    except:
+        pass
+    try:
+        if IR is not None:
+            master.after_cancel(IR)
+            IR = None
+    except:
+        pass
+    master.quit()
+    sys.exit()
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# declare the One-Wire InputPin and activate the pull-up resistor.
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+# Wait for connection-establishing to the DS18B20
+base_dir = '/sys/bus/w1/devices/'
+devices = glob.glob(base_dir + '28*')
+# define function to read the current sensor data
+# initialise sensors
+
+for i in range(len(devices)):
+    device_file = devices[i] + '/w1_slave'
+    TemperaturMessung(device_file)
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+master = tk.Tk()
+
+master.title("Measure Temp")
+
+E1 = tk.Label(master, text="    Temp measure interval (in seconds)    ")
+E1.grid(row=1, column=0)
+E1.configure(font=("Arial", 12, "bold"))
+
+e1 = tk.Entry(master)
+e1.insert(0, "10")
+e1.grid(row=2, column=0)
+
+E2 = tk.Label(master, text="    Pix taking interval (in seconds)    ")
+E2.grid(row=1, column=1)
+E2.configure(font=("Arial", 12, "bold"))
+
+e2 = tk.Entry(master)
+e2.insert(0, "30")
+e2.grid(row=2, column=1)
+
+OUT = tk.Label(master, text="Output folder")
+OUT.grid(row=1, column=2)
+OUT.configure(font=("Arial", 12, "bold"))
+
+Out = tk.Entry(master)
+Out.grid(row=2, column=2)
+Out.insert(0, "/home/pi/Pictures")
+
+ttk.Separator(master).grid(row=3, columnspan=3, sticky="ew")
+
+MI = tk.Label(master, text="Minimum target temperature")
+MI.grid(row=4, column=0)
+MI.configure(font=("Arial", 12, "bold"))
+
+MIN = tk.Entry(master)
+MIN.grid(row=5, column=0)
+MIN.insert(0, "18")
+
+MA = tk.Label(master, text="Maximum target temperature")
+MA.grid(row=4, column=2)
+MA.configure(font=("Arial", 12, "bold"))
+
+MAX = tk.Entry(master)
+MAX.grid(row=5, column=2)
+MAX.insert(0, "24")
+
+panel = ""
+panel2 = ""
+TIME = [[], [], [], []]
+
+ttk.Separator(master).grid(row=6, columnspan=3, sticky="ew")
+
+TE = d(str)
+for i in range(len(devices)):
+    SE = tk.Label(master, text="Sensor "+str(i))
+    SE.grid(row=7, column=i)
+    SE.configure(font=("Arial", 12, "bold"))
+    TE[i] = tk.Label(master, text=str(
+        TemperaturAuswertung(devices[i] + "/w1_slave"))+"C")
+    TE[i].grid(row=8, column=i)
+
+ttk.Separator(master).grid(row=9, columnspan=3, sticky="ew")
+
+
+M = tk.Button(master, text="MeasureTemp", command=starttemp)
+M.grid(row=10, column=0)
+P = tk.Button(master, text="TakePix", command=startimage)
+P.grid(row=10, column=1)
+Q = tk.Button(master, text="Quit", command=stop)
+Q.grid(row=10, column=2)
+Q.configure(foreground="red")
+
+DT2 = datetime.now().strftime("%d-%m-%Y_%H-%M")
+
+master.mainloop()
