@@ -1,24 +1,24 @@
 ### Tutorial - Operating the thermal gradient apparatus
 
 #### 1) Start the gradient apparatus
-Fire up the gradient apparatus by connecting the peltiers to the power supplies and switch on the devices. Importantly, don't put excessive Voltage (never exceed 5-10V) and be aware that electricity can be dangerous, thus handle with care, e.g. DO NOT drop the Peltier in the water as this will cause a short circuit!!
+- Fire up the gradient apparatus by connecting the peltiers to the power supplies and switch on the devices. Importantly, don't put excessive Voltage (never exceed 5-10V) and be aware that electricity can be dangerous, thus handle with care, e.g. DO NOT drop the Peltier in the water as this will cause a short circuit!!
 
-The side of Peltier element with a label is the one that is cooling and the other one is heating. Thus, check before-hands if the Peltier is correctly oriented for your purpose on each heat block. You need to fill the bucket with ice and place the heat block in there at the side where you want to cool because the "Abwärme" is otherwise too strong and will eventually result in a loss of cooling capacity. 
+- The side of Peltier element with a label is the one that is cooling and the other one is heating. Thus, check before-hands if the Peltier is correctly oriented for your purpose on each heat block. You need to fill the bucket with ice and place the heat block in there at the side where you want to cool because the "Abwärme" is otherwise too strong and will eventually result in a loss of cooling capacity. 
 
-I found that a setting of 4V and 2.5A on the hot (left) side and 3.5V and 2.5A on the cold (right) side, yields a good gradient at room temperature (from app. 11° - 30°C)
+- I found that a setting of 4V and 2.5A on the hot (left) side and 3.5V and 2.5A on the cold (right) side, yields a good gradient at room temperature (from app. 11° - 30°C)
 
-Make sure to put a strip of wet filterpaper between the metal plate and the arena to avoid dessication of the flies
+- Make sure to put a strip of wet filterpaper between the metal plate and the arena to avoid dessication of the flies
 
-Seal the ends of the arena (after the top openings) with cotton stoppers and put the temperature sensors in the correct order: 0 at the cold end; 1 to the middle and 2 at the hot end. 
+- Seal the ends of the arena (after the top openings) with cotton stoppers and put the temperature sensors in the correct order: 0 at the cold end; 1 to the middle and 2 at the hot end. 
 
 #### 2) Set up Raspberry pi to collect data.
-On the Raspberry Pi, double click on the Python-script TempPixGradient.py on the Desktop, which then opens up in Thorny. Then click on "Run". 
+- On the Raspberry Pi, double click on the Python-script TempPixGradient.py on the Desktop, which then opens up in Thorny. Then click on "Run". 
 
-A new window will open. At first, set an output directory. I would just add a folder to the path `/home/pi/Pictures`, which is already written in the window. Note, that the path may NOT contain any spaces!! For example put: `/home/pi/Pictures/test_210527`
+- A new window will open. At first, set an output directory. I would just add a folder to the path `/home/pi/Pictures`, which is already written in the window. Note, that the path may NOT contain any spaces!! For example put: `/home/pi/Pictures/test_210527`
 
-Then, you can adjust the intervals of temperature measurements and image taking in the corresponding windows in seconds. Finally, you can optionally set the desired temperature interval. The colours of the temperatures at the sensors will then indicate how close you are to these, I.e. if the temp is too cold, the color will become blue, if it is close to the desired temp, it will be green and if it is too hot, it will become red.
+- Then, you can adjust the intervals of temperature measurements and image taking in the corresponding windows in seconds. Finally, you can optionally set the desired temperature interval. The colours of the temperatures at the sensors will then indicate how close you are to these, I.e. if the temp is too cold, the color will become blue, if it is close to the desired temp, it will be green and if it is too hot, it will become red.
 
-If everything is set press "Measure Temperature" to start the temperature measurements. The line plot  at the bottom will show the development of the thermal gradient over time. I would then let the gradient equilibrate for 30min before starting the experiments. The experiment can start once the temperatures do not change a lot anymore.
+- If everything is set press "Measure Temperature" to start the temperature measurements. The line plot  at the bottom will show the development of the thermal gradient over time. I would then let the gradient equilibrate for 30min before starting the experiments. The experiment can start once the temperatures do not change a lot anymore.
 
 #### 3) Add flies for thermal preference measurment
  Before adding the flies, make sure that there are NO large spaces between the aluminum plate and the plexiglass arena so that no flies can slip underneath
