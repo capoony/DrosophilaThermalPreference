@@ -24,6 +24,10 @@
 
 ## Wiring setup
 
+#### Wiring of powersupply and Peltier elements 
+
+![Wiring_power](design/ThermalGradient_power.png)
+
 #### Wiring on Raspberry Pi with Joy-It Baseboard 
 
 ![Wiring_Rasp](design/Wiring1.png)
