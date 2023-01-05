@@ -18,9 +18,9 @@
 - Seal the ends of the arena (after the top openings) with cotton stoppers and put the temperature sensors in the correct order: 0 at the cold end; 1 to the middle and 2 at the hot end. 
 
 ### 2) Set up Raspberry pi to collect data.
-- On the Raspberry Pi, double click on the Python-script TempPixGradient.py on the Desktop, which then opens up in Thorny. Then click on "Run". 
+- On the Raspberry Pi, make sure that all necessary hardware is properly installed and the Python script [TempPixGradient.py](scripts/TempPixGradient) is copied to the Desktop. Double click on the Python-script, which then open in Thorny. Then click on "Run". 
 
-- A new window will open. At first, set an output directory. I would just add a folder to the path `/home/pi/Pictures`, which is already written in the window. Note, that the path may NOT contain any spaces!! For example put: `/home/pi/Pictures/test_210527`
+- A new GUI window will open. At first, set an output directory. I would just add a folder to the path `/home/pi/Pictures`, which is already written in the window. Note, that the path may NOT contain any spaces!! For example put: `/home/pi/Pictures/test_210527`
 
 - Then, you can adjust the intervals of temperature measurements and image taking in the corresponding windows in seconds. Finally, you can optionally set the desired temperature interval. The colours of the temperatures at the sensors will then indicate how close you are to these, I.e. if the temp is too cold, the color will become blue, if it is close to the desired temp, it will be green and if it is too hot, it will become red.
 
@@ -50,7 +50,7 @@
 pip3 install numpy scipy matplotlib
 ```
 
-- Then, build the command line for the Python script `analyzeTemp.py`, which can be found in the scripts folder:
+- Then, build the command line for the Python script [`analyzeTemp.py`](scripts/analyzeTemp.py):
 
 ```bash
 python3 scripts/analyzeTemp.py \
