@@ -1,5 +1,7 @@
 ## Components
 
+(sorry for being available in german only)
+
 - [Yageo CFR-25JT-52-4K7 Kohleschicht-Widerstand 4.7 kΩ axial bedrahtet 0207 0.25 W 5 % 1 St. ](https://www.conrad.ch/de/p/yageo-cfr-25jt-52-4k7-kohleschicht-widerstand-4-7-k-axial-bedrahtet-0207-0-25-w-5-1-st-1417695.html)
 
 - [Joy-it Baseboard mit Analogconverter, 12*XH254](https://www.conrad.ch/de/p/joy-it-baseboard-mit-analogconverter-12-xh254-raspberry-pi-erweiterungs-platine-1267835.html)
@@ -17,3 +19,23 @@
 - [TRU COMPONENTS 98001c421 Steckbrücken-Set Bunt Polzahl Gesamt 1 75 Teile ](https://www.conrad.ch/de/p/tru-components-98001c421-steckbruecken-set-bunt-polzahl-gesamt-1-75-teile-1662102.html)
 
 - [Maxim Integrated DS18B20+ Linear IC - Temperatursensor, Wandler Digital, zentral 1-Wire® TO-92-3 ](https://www.conrad.ch/de/p/maxim-integrated-ds18b20-linear-ic-temperatursensor-wandler-digital-zentral-1-wire-to-92-3-1123323.html)
+
+## Wiring setup
+
+#### Wiring on Raspberry Pi with Joy-It Baseboard 
+
+![Wiring_Rasp](design/Wiring1.png)
+
+#### Wiring on Breadboard
+
+![Wiring_board1](design/Wiring_board1.png)
+![Wiring_board2](design/Wiring_board2.png)
+![Wiring_board3](design/Wiring_board3.png)
+
+#### Wiring on DS18B20+ TempSensor 
+
+![Wiring_TempSensor](design/Wiring_TempSensor.png)
+
+#### Complete Setup
+
+![Wiring_complete](design/ThermalGradientTube_complete.png)
