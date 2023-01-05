@@ -20,6 +20,8 @@
 
 - [Maxim Integrated DS18B20+ Linear IC - Temperatursensor, Wandler Digital, zentral 1-Wire® TO-92-3 ](https://www.conrad.ch/de/p/maxim-integrated-ds18b20-linear-ic-temperatursensor-wandler-digital-zentral-1-wire-to-92-3-1123323.html)
 
+- [RND 320-KD3005D - Labornetzgerät, 30V, 5A, 150W, Einstellbar, CEE 7/7, RND Lab](https://www.distrelec.at/de/labornetzgeraet-30v-5a-150w-einstellbar-cee-rnd-lab-rnd-320-kd3005d/p/30061866)
+
 ## Wiring setup
 
 #### Wiring on Raspberry Pi with Joy-It Baseboard 
