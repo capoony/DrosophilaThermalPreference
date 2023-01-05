@@ -7,3 +7,6 @@ In this repository, we describe how to assess thermal preference in _Drosophila 
 - [Tubular design](Design_tube.md)
 - [Plate design](Design_plate.md)
 
+2) Next, we explain how the machine is operated
+
+- [Tutorial](TUTORIAL.md)
