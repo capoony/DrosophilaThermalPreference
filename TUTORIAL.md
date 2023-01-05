@@ -44,7 +44,7 @@
 
 - When you are done, do the actual measurements as above and copy the values to Excel. There, you need to make a list of the X and Y coordinates and store it as a tab-delimited file with a header-line containing X and Y. X any Y need to be the first columns, but you can add any additional columns with meta-information after that.
 
-- Install Python 3 from here: https://www.python.org/downloads/.In addition, install the packages numpy scipy and matplotlib with pip3. Copy and execute the following command in Terminal: 
+- Install Python 3 from here: https://www.python.org/downloads/. In addition, install the python packages numpy scipy and matplotlib with pip3. Copy and execute the following command in Terminal: 
 
 ```bash
 pip3 install numpy scipy matplotlib
