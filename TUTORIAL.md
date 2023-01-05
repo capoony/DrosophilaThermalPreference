@@ -3,7 +3,13 @@
 ### 1) Start the gradient apparatus
 - Fire up the gradient apparatus by connecting the peltiers to the power supplies and switch on the devices. Importantly, don't put excessive Voltage (never exceed 5-10V) and be aware that electricity can be dangerous, thus handle with care, e.g. DO NOT drop the Peltier in the water as this will cause a short circuit!!
 
-- The side of Peltier element with a label is the one that is cooling and the other one is heating. Thus, check before-hands if the Peltier is correctly oriented for your purpose on each heat block. You need to fill the bucket with ice and place the heat block in there at the side where you want to cool because the "Abwärme" is otherwise too strong and will eventually result in a loss of cooling capacity. 
+![Power](design/ThermalGradient_power.png)
+
+- The side of Peltier element with a label is the one that is cooling and the other one is heating. Thus, check before-hands if the Peltier is correctly oriented for your purpose on each heat block. You need to fill the bucket with ice and place the heat block in there at the side where you want to cool because the "Abwärme" is otherwise too strong and will eventually result in a loss of cooling capacity.
+- Cooling:
+![cooling](design/ThermalGradientTube_english3_cooling.png)
+- Heating:
+![heating](design/ThermalGradientTube_english3_heating.png)
 
 - I found that a setting of 4V and 2.5A on the hot (left) side and 3.5V and 2.5A on the cold (right) side, yields a good gradient at room temperature (from app. 11° - 30°C)
 
@@ -55,7 +61,10 @@ python3 scripts/analyzeTemp.py \
 --output <PathTo>/Output
 ```
 
-- Replace \<PathTo\> with the full directory path to the script analyzeTemp.py, the input file and the output. Replace \<X\>,\<Y\> and \<Temp\> with the values of the X and Y coordinates and the measured temperatures at Sensor0 (low), Sensor1 (mid) and Sensor(2). "InputTable" is the tab-delimited file for the fly coordinates "Output" is a prefix for the name of the output table and an output figure.
+- Replace \<PathTo\> with the full directory path to the script analyzeTemp.py, the input file and the output. Replace \<X\>,\<Y\> and \<Temp\> with the values of the X and Y coordinates and the measured temperatures at Sensor0 (low), Sensor1 (mid) and Sensor(2). "InputTable" is the tab-delimited file for the fly coordinates "Output" is a prefix for the name of the output table and an output figure. The Tp is calculated based on the coordinates according to this:
+
+![formula](design/ThermalGradient_quantification_formula.png)
+![image](design/ThermalGradient_quantification_image.png)
  
 ### 5) Test dataset
 - to test the workflow on a test dataset, execute the CommandlineExample in TestData
