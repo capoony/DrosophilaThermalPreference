@@ -1,0 +1,79 @@
+
+**** Linear mixed model ****
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: TempEst ~ genotype * food + (1 | replica/genotype)
+   Data: DATA
+
+REML criterion at convergence: 3674.2
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.71264 -0.67660 -0.01195  0.69434  2.68007 
+
+Random effects:
+ Groups           Name        Variance Std.Dev.
+ genotype:replica (Intercept) 0.1578   0.3972  
+ replica          (Intercept) 0.4059   0.6371  
+ Residual                     6.1812   2.4862  
+Number of obs: 785, groups:  genotype:replica, 6; replica, 3
+
+Fixed effects:
+                 Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)      22.53144    0.41302   1.99499  54.552 0.000342 ***
+genotype1        -0.01044    0.18782   1.92422  -0.056 0.960918    
+food1            -0.46361    0.09474 778.95852  -4.894  1.2e-06 ***
+genotype1:food1  -0.03737    0.09474 778.93466  -0.394 0.693361    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) gntyp1 food1 
+genotype1    0.031              
+food1       -0.002 -0.082       
+gentyp1:fd1 -0.037 -0.005  0.253
+Data: DATA
+Models:
+LMM1.null.interaction: TempEst ~ genotype + food + (1 | replica/genotype)
+LMM1: TempEst ~ genotype * food + (1 | replica/genotype)
+                      npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.interaction    6 3678.7 3706.7 -1833.4   3666.7                     
+LMM1                     7 3680.6 3713.2 -1833.3   3666.6 0.1724  1      0.678
+Data: DATA
+Models:
+LMM1.null.food: TempEst ~ genotype + (1 | replica/genotype)
+LMM1: TempEst ~ genotype * food + (1 | replica/genotype)
+               npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+LMM1.null.food    5 3700.7 3724.0 -1845.3   3690.7                         
+LMM1              7 3680.6 3713.2 -1833.3   3666.6 24.119  2  5.788e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Data: DATA
+Models:
+LMM1.null.genotype: TempEst ~ food + (1 | replica/genotype)
+LMM1: TempEst ~ genotype * food + (1 | replica/genotype)
+                   npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.genotype    5 3676.7 3700.1 -1833.4   3666.7                     
+LMM1                  7 3680.6 3713.2 -1833.3   3666.6 0.1748  2     0.9163
+$`emmeans of genotype, food`
+ genotype food     emmean    SE   df lower.CL upper.CL
+ w-       homemade   22.0 0.477 3.41     20.6     23.4
+ w2+      homemade   22.1 0.469 3.20     20.7     23.6
+ w-       instant    23.0 0.489 3.79     21.6     24.4
+ w2+      instant    23.0 0.458 2.89     21.5     24.5
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+$`pairwise differences of genotype, food`
+ 1                              estimate    SE     df t.ratio p.value
+ (w- homemade) - (w2+ homemade)  -0.0956 0.420   3.16  -0.228  0.9950
+ (w- homemade) - (w- instant)    -1.0020 0.300 777.08  -3.340  0.0049
+ (w- homemade) - (w2+ instant)   -0.9481 0.407   2.77  -2.327  0.2817
+ (w2+ homemade) - (w- instant)   -0.9064 0.435   3.61  -2.086  0.3075
+ (w2+ homemade) - (w2+ instant)  -0.8525 0.233 779.84  -3.667  0.0015
+ (w- instant) - (w2+ instant)     0.0539 0.422   3.19   0.128  0.9991
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 4 estimates 
+

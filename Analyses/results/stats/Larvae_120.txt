@@ -1,0 +1,42 @@
+
+**** Linear mixed model ****
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: poisson  ( log )
+Formula: temp ~ infection + (1 | replica/infection) + (1 | time)
+   Data: DATA
+
+     AIC      BIC   logLik deviance df.resid 
+  4405.6   4429.4  -2197.8   4395.6      856 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-0.9601 -0.3792 -0.1153  0.4055  2.5930 
+
+Random effects:
+ Groups            Name        Variance Std.Dev.
+ infection:replica (Intercept) 0.000000 0.00000 
+ replica           (Intercept) 0.002789 0.05281 
+ time              (Intercept) 0.000000 0.00000 
+Number of obs: 861, groups:  infection:replica, 10; replica, 5; time, 4
+
+Fixed effects:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept) 2.934813   0.025050 117.158   <2e-16 ***
+infection1  0.007110   0.008152   0.872    0.383    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+           (Intr)
+infection1 0.074 
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+Data: DATA
+Models:
+LMM1.null: temp ~ (1 | replica/infection) + (1 | time)
+LMM1: temp ~ infection + (1 | replica/infection) + (1 | time)
+          npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null    4 4404.4 4423.4 -2198.2   4396.4                     
+LMM1         5 4405.6 4429.4 -2197.8   4395.6 0.7597  1     0.3834

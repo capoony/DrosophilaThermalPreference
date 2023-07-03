@@ -1,0 +1,129 @@
+
+**** Linear mixed model ****
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: TempEst ~ infection * gradient_machine + (1 | replica/infection) +  
+    (1 | time)
+   Data: DATA
+
+REML criterion at convergence: 6600.6
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.4566 -0.6338 -0.0117  0.5984  3.7633 
+
+Random effects:
+ Groups            Name        Variance Std.Dev.
+ infection:replica (Intercept) 0.02737  0.1654  
+ replica           (Intercept) 0.06169  0.2484  
+ time              (Intercept) 0.03294  0.1815  
+ Residual                      4.45683  2.1111  
+Number of obs: 1516, groups:  infection:replica, 20; replica, 5; time, 4
+
+Fixed effects:
+                               Estimate Std. Error         df t value Pr(>|t|)
+(Intercept)                    19.95740    0.15818    4.25087 126.172 9.27e-09
+infection1                      0.01498    0.11835    7.62585   0.127  0.90255
+infection2                      0.40642    0.12211    8.23436   3.328  0.00999
+infection3                     -0.27191    0.11551    7.52799  -2.354  0.04831
+gradient_machine1              -1.72476    0.05564 1379.98468 -30.998  < 2e-16
+infection1:gradient_machine1    0.13636    0.09686  674.88662   1.408  0.15967
+infection2:gradient_machine1   -0.06709    0.10126  637.25775  -0.663  0.50784
+infection3:gradient_machine1   -0.18868    0.09868  370.46881  -1.912  0.05665
+                                
+(Intercept)                  ***
+infection1                      
+infection2                   ** 
+infection3                   *  
+gradient_machine1            ***
+infection1:gradient_machine1    
+infection2:gradient_machine1    
+infection3:gradient_machine1 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) infct1 infct2 infct3 grdn_1 in1:_1 in2:_1
+infection1  -0.010                                          
+infection2   0.013 -0.385                                   
+infection3  -0.007 -0.295 -0.320                            
+grdnt_mchn1  0.051 -0.054 -0.011  0.030                     
+infctn1:g_1 -0.021  0.118 -0.062  0.002 -0.026              
+infctn2:g_1 -0.009 -0.066  0.148 -0.051  0.023 -0.375       
+infctn3:g_1  0.012  0.014 -0.054  0.170 -0.005 -0.237 -0.363
+Data: DATA
+Models:
+LMM1.null.infection: TempEst ~ gradient_machine + (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection * gradient_machine + (1 | replica/infection) + (1 | time)
+                    npar    AIC    BIC  logLik deviance Chisq Df Pr(>Chisq)   
+LMM1.null.infection    6 6608.0 6639.9 -3298.0   6596.0                       
+LMM1                  12 6601.1 6665.0 -3288.5   6577.1 18.88  6    0.00437 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Data: DATA
+Models:
+LMM1.null.interaction: TempEst ~ infection + gradient_machine + (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection * gradient_machine + (1 | replica/infection) + (1 | time)
+                      npar    AIC    BIC  logLik deviance Chisq Df Pr(>Chisq)
+LMM1.null.interaction    9 6599.7 6647.6 -3290.8   6581.7                    
+LMM1                    12 6601.1 6665.0 -3288.5   6577.1 4.612  3     0.2025
+Data: DATA
+Models:
+LMM1.null.gradient_machine: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection * gradient_machine + (1 | replica/infection) + (1 | time)
+                           npar    AIC    BIC  logLik deviance  Chisq Df
+LMM1.null.gradient_machine    8 7341.7 7384.3 -3662.9   7325.7          
+LMM1                         12 6601.1 6665.0 -3288.5   6577.1 748.63  4
+                           Pr(>Chisq)    
+LMM1.null.gradient_machine               
+LMM1                        < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+$`emmeans of infection, gradient_machine`
+ infection gradient_machine emmean    SE   df lower.CL upper.CL
+ w-        flat               18.4 0.237 18.1     17.9     18.9
+ w+        flat               18.6 0.248 21.4     18.1     19.1
+ w2+       flat               17.8 0.244 20.2     17.3     18.3
+ w3+       flat               18.2 0.247 24.6     17.7     18.7
+ w-        tube               21.6 0.221 17.0     21.1     22.0
+ w+        tube               22.2 0.224 18.0     21.7     22.6
+ w2+       tube               21.6 0.214 14.9     21.1     22.1
+ w3+       tube               21.4 0.215 15.0     21.0     21.9
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+$`pairwise differences of infection, gradient_machine`
+ 1                       estimate    SE     df t.ratio p.value
+ (w- flat) - (w+ flat)    -0.1880 0.297   35.5  -0.633  0.9981
+ (w- flat) - (w2+ flat)    0.6119 0.261   34.5   2.341  0.3016
+ (w- flat) - (w3+ flat)    0.1814 0.283   39.1   0.641  0.9980
+ (w- flat) - (w- tube)    -3.1768 0.227  975.2 -13.996  <.0001
+ (w- flat) - (w+ tube)    -3.7717 0.258   30.2 -14.640  <.0001
+ (w- flat) - (w2+ tube)   -3.2149 0.251   26.4 -12.798  <.0001
+ (w- flat) - (w3+ tube)   -3.0293 0.243   25.9 -12.475  <.0001
+ (w+ flat) - (w2+ flat)    0.7999 0.286   38.2   2.793  0.1268
+ (w+ flat) - (w3+ flat)    0.3694 0.281   43.0   1.314  0.8886
+ (w+ flat) - (w- tube)    -2.9888 0.268   32.6 -11.155  <.0001
+ (w+ flat) - (w+ tube)    -3.5837 0.238 1115.3 -15.034  <.0001
+ (w+ flat) - (w2+ tube)   -3.0270 0.253   29.3 -11.944  <.0001
+ (w+ flat) - (w3+ tube)   -2.8413 0.261   28.2 -10.880  <.0001
+ (w2+ flat) - (w3+ flat)  -0.4305 0.296   42.6  -1.457  0.8253
+ (w2+ flat) - (w- tube)   -3.7887 0.263   31.2 -14.388  <.0001
+ (w2+ flat) - (w+ tube)   -4.3836 0.258   32.7 -16.971  <.0001
+ (w2+ flat) - (w2+ tube)  -3.8269 0.236  521.1 -16.185  <.0001
+ (w2+ flat) - (w3+ tube)  -3.6412 0.252   28.7 -14.448  <.0001
+ (w3+ flat) - (w- tube)   -3.3582 0.260   35.6 -12.913  <.0001
+ (w3+ flat) - (w+ tube)   -3.9531 0.267   37.9 -14.825  <.0001
+ (w3+ flat) - (w2+ tube)  -3.3964 0.252   32.6 -13.464  <.0001
+ (w3+ flat) - (w3+ tube)  -3.2107 0.236 1100.8 -13.587  <.0001
+ (w- tube) - (w+ tube)    -0.5949 0.242   26.7  -2.455  0.2571
+ (w- tube) - (w2+ tube)   -0.0381 0.232   22.8  -0.165  1.0000
+ (w- tube) - (w3+ tube)    0.1475 0.231   22.1   0.638  0.9978
+ (w+ tube) - (w2+ tube)    0.5567 0.236   24.5   2.363  0.3019
+ (w+ tube) - (w3+ tube)    0.7424 0.235   23.7   3.157  0.0700
+ (w2+ tube) - (w3+ tube)   0.1857 0.226   19.9   0.821  0.9897
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 8 estimates 
+

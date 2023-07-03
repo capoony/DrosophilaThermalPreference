@@ -1,0 +1,67 @@
+
+**** Linear mixed model ****
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+   Data: DATA
+
+REML criterion at convergence: 3114.9
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.21662 -0.72836  0.01875  0.61084  3.12687 
+
+Random effects:
+ Groups            Name        Variance Std.Dev.
+ infection:replica (Intercept) 0.3669   0.6057  
+ replica           (Intercept) 0.0000   0.0000  
+ time              (Intercept) 0.0000   0.0000  
+ Residual                      6.8445   2.6162  
+Number of obs: 650, groups:  infection:replica, 20; replica, 5; time, 4
+
+Fixed effects:
+            Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept) 18.26338    0.17084 15.83102 106.902   <2e-16 ***
+infection1   0.07537    0.29034 14.71436   0.260    0.799    
+infection2   0.41916    0.29722 16.04693   1.410    0.178    
+infection3  -0.37272    0.29437 15.55239  -1.266    0.224    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+           (Intr) infct1 infct2
+infection1 -0.033              
+infection2  0.008 -0.324       
+infection3 -0.009 -0.317 -0.333
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+Data: DATA
+Models:
+LMM1.null.infection: TempEst ~ (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+                    npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.infection    5 3123.7 3146.1 -1556.8   3113.7                     
+LMM1                   8 3126.4 3162.2 -1555.2   3110.4 3.2915  3     0.3488
+PostHocTest$emmeans
+ infection emmean    SE    df lower.CL upper.CL
+ w-          18.3 0.398  4.93     17.3     19.4
+ w+          18.7 0.418  5.59     17.6     19.7
+ w2+         17.9 0.420  5.17     16.8     19.0
+ w3+         18.1 0.385 10.65     17.3     19.0
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast      estimate    SE    df t.ratio p.value
+ (w-) - (w+)     -0.344 0.655  4.22  -0.525  0.9488
+ (w-) - (w2+)     0.448 0.547 10.72   0.819  0.8445
+ (w-) - (w3+)     0.197 0.581  9.13   0.339  0.9857
+ (w+) - (w2+)     0.792 0.587  8.68   1.348  0.5592
+ (w+) - (w3+)     0.541 0.562 12.30   0.962  0.7728
+ (w2+) - (w3+)   -0.251 0.634  7.29  -0.396  0.9774
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 4 estimates 
+

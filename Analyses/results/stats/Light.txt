@@ -1,0 +1,79 @@
+
+**** Linear mixed model ****
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: TempEst ~ infection * light + (1 | replica/infection)
+   Data: DATA
+
+REML criterion at convergence: 3563.9
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2903 -0.5729 -0.0362  0.5631  4.4970 
+
+Random effects:
+ Groups            Name        Variance Std.Dev.
+ infection:replica (Intercept) 1.1029   1.0502  
+ replica           (Intercept) 0.2155   0.4642  
+ Residual                      4.7042   2.1689  
+Number of obs: 806, groups:  infection:replica, 8; replica, 4
+
+Fixed effects:
+                   Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)        22.04793    0.44514   2.97862  49.531 1.93e-05 ***
+infection1         -0.25489    0.37984   2.89317  -0.671   0.5519    
+light1             -0.18725    0.08876 789.95760  -2.110   0.0352 *  
+infection1:light1   0.09252    0.08859 774.25662   1.044   0.2967    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) infct1 light1
+infection1   0.001              
+light1      -0.029 -0.001       
+infctn1:lg1 -0.001 -0.033  0.122
+Data: DATA
+Models:
+LMM1.null.interaction: TempEst ~ infection + light + (1 | replica/infection)
+LMM1: TempEst ~ infection * light + (1 | replica/infection)
+                      npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.interaction    6 3570.6 3598.7 -1779.3   3558.6                     
+LMM1                     7 3571.7 3604.5 -1778.8   3557.7 0.9044  1     0.3416
+Data: DATA
+Models:
+LMM1.null.light: TempEst ~ infection + (1 | replica/infection)
+LMM1: TempEst ~ infection * light + (1 | replica/infection)
+                npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)  
+LMM1.null.light    5 3573.4 3596.8 -1781.7   3563.4                       
+LMM1               7 3571.7 3604.5 -1778.8   3557.7 5.6918  2    0.05808 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Data: DATA
+Models:
+LMM1.null.infection: TempEst ~ light + (1 | replica/infection)
+LMM1: TempEst ~ infection * light + (1 | replica/infection)
+                    npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.infection    5 3569.2 3592.6 -1779.6   3559.2                     
+LMM1                   7 3571.7 3604.5 -1778.8   3557.7 1.4908  2     0.4746
+$`emmeans of infection, light`
+ infection light emmean    SE   df lower.CL upper.CL
+ w-        off     21.7 0.597 6.27     20.3     23.1
+ w2+       off     22.0 0.593 6.13     20.6     23.5
+ w-        on      21.9 0.604 6.59     20.4     23.3
+ w2+       on      22.6 0.601 6.43     21.1     24.0
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+$`pairwise differences of infection, light`
+ 1                    estimate    SE     df t.ratio p.value
+ (w- off) - (w2+ off)   -0.325 0.775   3.21  -0.419  0.9716
+ (w- off) - (w- on)     -0.189 0.268 796.14  -0.706  0.8946
+ (w- off) - (w2+ on)    -0.884 0.780   3.31  -1.133  0.6962
+ (w2+ off) - (w- on)     0.135 0.781   3.31   0.173  0.9978
+ (w2+ off) - (w2+ on)   -0.560 0.237 798.28  -2.361  0.0857
+ (w- on) - (w2+ on)     -0.695 0.786   3.40  -0.883  0.8149
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 4 estimates 
+

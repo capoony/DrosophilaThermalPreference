@@ -1,0 +1,66 @@
+
+**** Linear mixed model ****
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+   Data: DATA
+
+REML criterion at convergence: 3273.4
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.80950 -0.58726 -0.03322  0.64674  2.99248 
+
+Random effects:
+ Groups            Name        Variance Std.Dev.
+ infection:replica (Intercept) 0.04981  0.2232  
+ replica           (Intercept) 0.06083  0.2466  
+ time              (Intercept) 0.01791  0.1338  
+ Residual                      2.49083  1.5782  
+Number of obs: 866, groups:  infection:replica, 20; replica, 5; time, 4
+
+Fixed effects:
+            Estimate Std. Error       df t value Pr(>|t|)    
+(Intercept) 21.69243    0.14875  4.40970 145.828 2.72e-09 ***
+infection1  -0.11335    0.13033  8.25994  -0.870   0.4090    
+infection2   0.46964    0.13202  8.94588   3.557   0.0062 ** 
+infection3  -0.08019    0.12672  7.58521  -0.633   0.5454    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+           (Intr) infct1 infct2
+infection1  0.010              
+infection2  0.016 -0.354       
+infection3 -0.018 -0.326 -0.336
+Data: DATA
+Models:
+LMM1.null.infection: TempEst ~ (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+                    npar    AIC    BIC  logLik deviance Chisq Df Pr(>Chisq)  
+LMM1.null.infection    5 3284.6 3308.4 -1637.3   3274.6                      
+LMM1                   8 3279.6 3317.7 -1631.8   3263.6 11.02  3    0.01162 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+$emmeans
+ infection emmean    SE   df lower.CL upper.CL
+ w-          21.6 0.201 12.2     21.1     22.0
+ w+          22.2 0.203 12.6     21.7     22.6
+ w2+         21.6 0.195 11.1     21.2     22.0
+ w3+         21.4 0.197 11.3     21.0     21.8
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+$contrasts
+ contrast      estimate    SE   df t.ratio p.value
+ (w-) - (w+)    -0.5830 0.221 9.91  -2.643  0.0969
+ (w-) - (w2+)   -0.0332 0.213 8.75  -0.156  0.9986
+ (w-) - (w3+)    0.1627 0.213 8.58   0.762  0.8691
+ (w+) - (w2+)    0.5498 0.217 9.32   2.538  0.1175
+ (w+) - (w3+)    0.7457 0.216 9.10   3.447  0.0302
+ (w2+) - (w3+)   0.1959 0.210 8.05   0.934  0.7883
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 4 estimates 
+

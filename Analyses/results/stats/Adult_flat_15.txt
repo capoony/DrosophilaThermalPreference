@@ -1,0 +1,9 @@
+
+**** Linear mixed model ****
+Data: DATA.filt
+Models:
+LMM1.null.infection: TempEst ~ (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+                    npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.infection    5 2511.1 2532.7 -1250.5   2501.1                     
+LMM1                   8 2514.3 2548.9 -1249.2   2498.3 2.7638  3     0.4295

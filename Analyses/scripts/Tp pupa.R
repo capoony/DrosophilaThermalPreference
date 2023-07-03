@@ -40,34 +40,16 @@ means2 <- DATA %>%
   dplyr::summarise(Mean = mean(temp), SD = sd(temp), Median = median(temp))
 means2
 
-
-labels <- c("w-" = "w-", "w+" = "wMelCS")
-
-DATA$infection <- as.factor(DATA$infection)
-levels(DATA$infection) <- labels
-
-PLOT <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
-  geom_boxplot() +
-  geom_jitter(aes(color = infection), position = position_jitterdodge(0.1, 0.1), alpha = 0.2) +
-  theme_classic() +
-  ylim(14, 28) +
-  labs(color = "Infection Type") +
-  ylab("Temperature (°C)") +
-  xlab("Infection Type") +
-  theme(
-    text = element_text(size = 15),
-    legend.position = "none"
-  ) +
-  scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels)
-
-
+sink("results/stats/Pupae.txt")
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))
 
-LMM1 <- glmer(temp ~ infection + (1 | replica) + (1 | time), data = DATA, family = poisson())
-LMM1.null <- glmer(temp ~ (1 | replica) + (1 | time), data = DATA, family = poisson())
+LMM1 <- glmer(temp ~ infection + (1 | replica / infection) + (1 | time), data = DATA, family = poisson())
+LMM1.null <- glmer(temp ~ (1 | replica / infection) + (1 | time), data = DATA, family = poisson())
 
 summary(LMM1)
 
 anova(LMM1, LMM1.null)
+
+sink()

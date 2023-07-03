@@ -1,0 +1,117 @@
+
+**** Linear mixed model ****
+Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: TempEst ~ infection * humidity + (1 | replica/infection) + (1 |  
+    time)
+   Data: DATA
+
+REML criterion at convergence: 7321
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.5977 -0.6012 -0.0085  0.5761  3.5459 
+
+Random effects:
+ Groups            Name        Variance Std.Dev.
+ infection:replica (Intercept) 0.05003  0.2237  
+ replica           (Intercept) 0.06446  0.2539  
+ time              (Intercept) 0.05785  0.2405  
+ Residual                      2.53687  1.5928  
+Number of obs: 1929, groups:  infection:replica, 20; replica, 5; time, 4
+
+Fixed effects:
+                       Estimate Std. Error         df t value Pr(>|t|)    
+(Intercept)           2.240e+01  1.782e-01  6.102e+00 125.719 1.19e-11 ***
+infection1           -1.394e-01  1.132e-01  7.878e+00  -1.232  0.25360    
+infection2            4.511e-01  1.140e-01  7.795e+00   3.957  0.00442 ** 
+infection3            1.543e-03  1.119e-01  7.835e+00   0.014  0.98934    
+humidity1            -6.995e-01  4.161e-02  1.180e+03 -16.809  < 2e-16 ***
+infection1:humidity1  4.832e-02  6.705e-02  7.480e+02   0.721  0.47138    
+infection2:humidity1 -2.236e-02  7.076e-02  3.171e+02  -0.316  0.75221    
+infection3:humidity1 -8.206e-02  7.201e-02  3.431e+02  -1.140  0.25524    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) infct1 infct2 infct3 hmdty1 inf1:1 inf2:1
+infection1   0.006                                          
+infection2   0.005 -0.346                                   
+infection3   0.000 -0.336 -0.334                            
+humidity1   -0.041  0.019  0.023 -0.037                     
+infctn1:hm1  0.013 -0.014 -0.007  0.022 -0.056              
+infctn2:hm1  0.013 -0.022 -0.030  0.027 -0.012 -0.304       
+infctn3:hm1 -0.015  0.018  0.037 -0.093  0.010 -0.307 -0.378
+Data: DATA
+Models:
+LMM1.null.interaction: TempEst ~ infection + humidity + (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection * humidity + (1 | replica/infection) + (1 | time)
+                      npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
+LMM1.null.interaction    9 7315.3 7365.3 -3648.6   7297.3                     
+LMM1                    12 7319.0 7385.8 -3647.5   7295.0 2.2425  3     0.5236
+Data: DATA
+Models:
+LMM1.null.humidity: TempEst ~ infection + (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection * humidity + (1 | replica/infection) + (1 | time)
+                   npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)    
+LMM1.null.humidity    8 7577.8 7622.4 -3780.9   7561.8                         
+LMM1                 12 7319.0 7385.8 -3647.5   7295.0 266.83  4  < 2.2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Data: DATA
+Models:
+LMM1.null.infection: TempEst ~ humidity + (1 | replica/infection) + (1 | time)
+LMM1: TempEst ~ infection * humidity + (1 | replica/infection) + (1 | time)
+                    npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)  
+LMM1.null.infection    6 7322.1 7355.5 -3655.0   7310.1                       
+LMM1                  12 7319.0 7385.8 -3647.5   7295.0 15.049  6    0.01988 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+$`emmeans of infection, humidity`
+ infection humidity emmean    SE   df lower.CL upper.CL
+ w-        30         21.6 0.225 13.8     21.1     22.1
+ w+        30         22.1 0.226 14.2     21.6     22.6
+ w2+       30         21.6 0.220 12.8     21.1     22.1
+ w3+       30         21.4 0.221 12.9     21.0     21.9
+ w-        60         22.9 0.229 13.4     22.4     23.4
+ w+        60         23.6 0.232 13.6     23.1     24.1
+ w2+       60         23.2 0.235 15.1     22.7     23.7
+ w3+       60         22.7 0.231 14.6     22.2     23.2
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+$`pairwise differences of infection, humidity`
+ 1                                   estimate    SE     df t.ratio p.value
+ (w- humidity30) - (w+ humidity30)    -0.5198 0.217   19.7  -2.394  0.2966
+ (w- humidity30) - (w2+ humidity30)   -0.0106 0.211   17.5  -0.050  1.0000
+ (w- humidity30) - (w3+ humidity30)    0.1660 0.212   17.5   0.784  0.9919
+ (w- humidity30) - (w- humidity60)    -1.3024 0.156 1151.3  -8.355  <.0001
+ (w- humidity30) - (w+ humidity60)    -1.9635 0.222   15.6  -8.855  <.0001
+ (w- humidity30) - (w2+ humidity60)   -1.5737 0.225   18.3  -6.993  <.0001
+ (w- humidity30) - (w3+ humidity60)   -1.1208 0.222   18.4  -5.054  0.0016
+ (w+ humidity30) - (w2+ humidity30)    0.5092 0.213   18.4   2.392  0.3007
+ (w+ humidity30) - (w3+ humidity30)    0.6858 0.214   18.4   3.210  0.0727
+ (w+ humidity30) - (w- humidity60)    -0.7825 0.221   17.4  -3.539  0.0401
+ (w+ humidity30) - (w+ humidity60)    -1.4437 0.167  554.0  -8.633  <.0001
+ (w+ humidity30) - (w2+ humidity60)   -1.0539 0.225   18.8  -4.674  0.0034
+ (w+ humidity30) - (w3+ humidity60)   -0.6010 0.223   18.9  -2.696  0.1836
+ (w2+ humidity30) - (w3+ humidity30)   0.1766 0.208   16.2   0.850  0.9868
+ (w2+ humidity30) - (w- humidity60)   -1.2918 0.214   15.4  -6.023  0.0004
+ (w2+ humidity30) - (w+ humidity60)   -1.9530 0.215   15.0  -9.071  <.0001
+ (w2+ humidity30) - (w2+ humidity60)  -1.5631 0.172  644.7  -9.114  <.0001
+ (w2+ humidity30) - (w3+ humidity60)  -1.1102 0.218   17.1  -5.101  0.0018
+ (w3+ humidity30) - (w- humidity60)   -1.4684 0.216   15.8  -6.809  0.0001
+ (w3+ humidity30) - (w+ humidity60)   -2.1295 0.223   15.5  -9.558  <.0001
+ (w3+ humidity30) - (w2+ humidity60)  -1.7397 0.222   18.8  -7.826  <.0001
+ (w3+ humidity30) - (w3+ humidity60)  -1.2868 0.172  647.4  -7.496  <.0001
+ (w- humidity60) - (w+ humidity60)    -0.6612 0.224   13.0  -2.955  0.1387
+ (w- humidity60) - (w2+ humidity60)   -0.2713 0.226   14.9  -1.201  0.9196
+ (w- humidity60) - (w3+ humidity60)    0.1816 0.222   14.6   0.817  0.9892
+ (w+ humidity60) - (w2+ humidity60)    0.3898 0.233   14.0   1.671  0.7040
+ (w+ humidity60) - (w3+ humidity60)    0.8428 0.227   14.0   3.709  0.0362
+ (w2+ humidity60) - (w3+ humidity60)   0.4529 0.229   17.1   1.978  0.5223
+
+Degrees-of-freedom method: kenward-roger 
+P value adjustment: tukey method for comparing a family of 8 estimates 
+
