@@ -11,7 +11,9 @@ library(multcomp)
 library(car)
 library(readxl)
 
-DATA <- read_excel("Strunov_etal_WolbTP_2023_RawData.xlsx", sheet = "3rd instar_140h")
+setwd("/Users/martinkapun/Documents/GitHub/DrosophilaThermalGradient/Analyses")
+
+DATA <- read_excel("data/Strunov_etal_WolbTP_2023_RawData.xlsx", sheet = "3rd instar_140h")
 summary(DATA)
 count(DATA, "infection")
 
@@ -40,13 +42,13 @@ means2
 
 labels <- c("w+" = "wMelCS")
 
-ggplot(means, aes(x = temp, y = Mean)) +
+PLOT <- ggplot(means, aes(x = temp, y = Mean)) +
   geom_point(
     alpha = 0.6,
     aes(col = infection), size = 2
   ) +
   geom_line(
-    linetype = "dashed", alpha = 0.9,
+    linetype = "dotted", alpha = 0.9,
     lwd = 0.9, aes(col = infection)
   ) +
   theme_classic() +
@@ -56,6 +58,8 @@ ggplot(means, aes(x = temp, y = Mean)) +
   theme(text = element_text(size = 15)) +
   scale_color_manual(values = c("#999999", "firebrick3"), labels = labels)
 
+ggsave("results/Figure2.pdf", PLOT, width = 8, height = 4)
+ggsave("results/Figure2.png", PLOT, width = 8, height = 4)
 
 cat("\n**** Linear mixed model ****\n")
 
