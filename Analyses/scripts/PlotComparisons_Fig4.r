@@ -31,7 +31,7 @@ DevPlot <- ggplot(DATA, aes(x = gradient_machine, y = TempEst, color = infection
     theme_classic() +
     theme(text = element_text(size = 15)) +
     xlab("Thermal gradient device") +
-    labs(color = "Genotype") +
+    labs(color = "Infection Type") +
     scale_y_continuous(name = "Temperature (°C)", breaks = seq(10, 36, 1)) +
     scale_colour_manual(values = c("darkgrey", "blue3", "firebrick3", "orange"), labels = labels)
 
@@ -52,7 +52,7 @@ HumPlot <- ggplot(DATA, aes(x = humidity, y = TempEst, color = infection)) +
     theme_classic() +
     theme(text = element_text(size = 15)) +
     xlab("Humidity") +
-    labs(color = "Genotype") +
+    labs(color = "Infection Type") +
     scale_y_continuous(name = "Temperature (°C)", breaks = seq(10, 36, 1)) +
     scale_colour_manual(values = c("darkgrey", "blue3", "firebrick3", "orange"), labels = labels)
 
@@ -76,7 +76,7 @@ FoodPlot <- ggplot(DATA, aes(x = food, y = TempEst, color = genotype)) +
     theme_classic() +
     theme(text = element_text(size = 15)) +
     xlab("Food type") +
-    labs(color = "Genotype") +
+    labs(color = "Infection Type") +
     scale_y_continuous(name = "Temperature (°C)", breaks = seq(10, 36, 1)) +
     scale_colour_manual(values = c("darkgrey", "firebrick3"), labels = labels)
 
@@ -97,7 +97,7 @@ LightPlot <- ggplot(DATA, aes(x = light, y = TempEst, color = infection)) +
     theme_classic() +
     theme(text = element_text(size = 15)) +
     xlab("Light Source") +
-    labs(color = "Genotype") +
+    labs(color = "Infection Type") +
     scale_y_continuous(name = "Temperature (°C)", breaks = seq(10, 36, 1)) +
     scale_colour_manual(values = c("darkgrey", "firebrick3"), labels = labels)
 

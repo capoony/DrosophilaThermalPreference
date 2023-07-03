@@ -37,7 +37,7 @@ means2
 
 labels <- c("w2+" = "wMelCS")
 
-ggplot(means, aes(x = temp, y = Mean)) +
+PanelA <- ggplot(means, aes(x = temp, y = Mean)) +
   geom_point(
     alpha = 0.6,
     aes(col = infection, shape = age_hours), size = 2
@@ -53,6 +53,8 @@ ggplot(means, aes(x = temp, y = Mean)) +
   theme(text = element_text(size = 15)) +
   scale_color_manual(values = c("grey", "firebrick3"), labels = labels) +
   scale_fill_manual(values = c("grey", "firebrick3"), labels = labels)
+
+
 
 cat("\n**** Linear mixed model ****\n")
 
