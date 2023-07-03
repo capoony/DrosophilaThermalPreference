@@ -37,23 +37,18 @@ means2
 
 labels <- c("w2+" = "wMelCS")
 
-PanelA <- ggplot(means, aes(x = temp, y = Mean)) +
-    geom_point(
-        alpha = 0.6,
-        aes(col = infection, shape = age_hours), size = 2
-    ) +
-    geom_line(
-        alpha = 0.9,
-        lwd = 0.9, aes(col = infection, linetype = age_hours)
-    ) +
+PanelA <- ggplot(DATA, aes(x = age_hours, y = temp, color = infection)) +
+    geom_boxplot() +
+    geom_jitter(aes(color = infection), position = position_jitterdodge(0.1, 0.1), alpha = 0.2) +
     theme_classic() +
-    labs(shape = "Age (hours)") +
     labs(color = "Infection Type") +
-    labs(linetype = "Age (hours)") +
-    geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE, col = infection), width = .1, position = position_dodge(0.01)) +
-    scale_x_continuous(name = "Temperature (°C)", breaks = c(15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28), limits = c(15, 28)) +
-    scale_y_continuous(name = "Frequency") +
-    theme(text = element_text(size = 15)) +
+    xlab("Age (hours)") +
+    ylab("Temperature (°C)") +
+    ylim(14, 28) +
+    theme(
+        text = element_text(size = 15),
+        legend.position = "none"
+    ) +
     scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels) +
     scale_fill_manual(values = c("darkgrey", "firebrick3"), labels = labels)
 
@@ -80,26 +75,24 @@ means <- DATA.mod %>%
     summarise(Mean = mean(Freq), SD = sd(Freq), SE = SD / sqrt(length(n)))
 means
 
-labels <- c("w+" = "wMelCS")
+labels <- c("w-" = "w-", "w+" = "wMelCS")
 
-PanelB <- ggplot(means, aes(x = temp, y = Mean)) +
-    geom_point(
-        alpha = 0.6,
-        aes(col = infection), size = 2
-    ) +
-    geom_line(
-        alpha = 0.9,
-        lwd = 0.9, aes(col = infection)
-    ) +
+DATA$infection <- as.factor(DATA$infection)
+levels(DATA$infection) <- labels
+
+
+PanelB <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
+    geom_boxplot() +
+    geom_jitter(aes(color = infection), position = position_jitterdodge(0.1, 0.1), alpha = 0.2) +
     theme_classic() +
+    ylim(14, 28) +
     labs(color = "Infection Type") +
-    geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE, col = infection), width = .1, position = position_dodge(0.01)) +
-    scale_x_continuous(name = "Temperature (°C)", breaks = seq(15, 30, 1)) +
-    scale_y_continuous(name = "Frequency") +
+    ylab("Temperature (°C)") +
+    xlab("Infection Type") +
     theme(text = element_text(size = 15)) +
     scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels)
 
-Fig1 <- plot_grid(PanelA, PanelB, labels = "AUTO", nrow = 2)
+Fig1 <- plot_grid(PanelA, PanelB, labels = "AUTO", ncol = 2)
 
-ggsave("results/Figure1.pdf", Fig1, width = 8, height = 8)
-ggsave("results/Figure1.png", Fig1, width = 8, height = 8)
+ggsave("results/Figure1.pdf", Fig1, width = 8, height = 4)
+ggsave("results/Figure1.png", Fig1, width = 8, height = 4)
