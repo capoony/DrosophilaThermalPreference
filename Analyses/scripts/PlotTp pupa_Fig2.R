@@ -40,26 +40,28 @@ means2 <- DATA %>%
   dplyr::summarise(Mean = mean(temp), SD = sd(temp), Median = median(temp))
 means2
 
-labels <- c("w+" = "wMelCS")
 
-PLOT <- ggplot(means, aes(x = temp, y = Mean)) +
-  geom_point(
-    alpha = 0.6,
-    aes(col = infection), size = 2
-  ) +
-  geom_line(
-    linetype = "dotted", alpha = 0.9,
-    lwd = 0.9, aes(col = infection)
-  ) +
+labels <- c("w-" = "w-", "w+" = "wMelCS")
+
+DATA$infection <- as.factor(DATA$infection)
+levels(DATA$infection) <- labels
+
+PLOT <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
+  geom_boxplot() +
+  geom_jitter(aes(color = infection), position = position_jitterdodge(0.1, 0.1), alpha = 0.2) +
   theme_classic() +
-  geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE, col = infection), width = .1, position = position_dodge(0.01)) +
-  scale_x_continuous(name = "Temperature (°C)", breaks = seq(15, 30, 1)) +
-  scale_y_continuous(name = "Frequency") +
-  theme(text = element_text(size = 15)) +
-  scale_color_manual(values = c("#999999", "firebrick3"), labels = labels)
+  ylim(14, 28) +
+  labs(color = "Infection Type") +
+  ylab("Temperature (°C)") +
+  xlab("Infection Type") +
+  theme(
+    text = element_text(size = 15),
+    legend.position = "none"
+  ) +
+  scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels)
 
-ggsave("results/Figure2.pdf", PLOT, width = 8, height = 4)
-ggsave("results/Figure2.png", PLOT, width = 8, height = 4)
+ggsave("results/Figure2.pdf", PLOT, width = 4, height = 4)
+ggsave("results/Figure2.png", PLOT, width = 4, height = 4)
 
 cat("\n**** Linear mixed model ****\n")
 

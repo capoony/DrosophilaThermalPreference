@@ -19,22 +19,6 @@ summary(DATA)
 DATA$replica <- as.factor(DATA$replica)
 DATA$age_hours <- as.factor(DATA$age_hours)
 
-DATA.mod <- DATA %>%
-    group_by(infection, temp, age_hours, replica) %>%
-    dplyr::summarise(n = n()) %>%
-    group_by(infection, age_hours, replica) %>%
-    mutate(Freq = n / sum(n))
-
-means <- DATA.mod %>%
-    group_by(infection, temp, age_hours) %>%
-    dplyr::summarise(Mean = mean(Freq), SD = sd(Freq), SE = SD / sqrt(length(n)))
-means
-
-means2 <- DATA %>%
-    group_by(infection, age_hours) %>%
-    dplyr::summarise(Mean = mean(temp), SD = sd(temp), Median = median(temp))
-means2
-
 labels <- c("w2+" = "wMelCS")
 
 PanelA <- ggplot(DATA, aes(x = age_hours, y = temp, color = infection)) +
@@ -51,6 +35,36 @@ PanelA <- ggplot(DATA, aes(x = age_hours, y = temp, color = infection)) +
     ) +
     scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels) +
     scale_fill_manual(values = c("darkgrey", "firebrick3"), labels = labels)
+
+DATA <- read_excel("data/Strunov_etal_WolbTP_2023_RawData.xlsx", sheet = "3rd instar_140h")
+summary(DATA)
+count(DATA, "infection")
+
+DATA$replica <- as.factor(DATA$replica)
+
+labels <- c("w-" = "w-", "w+" = "wMelCS")
+
+DATA$infection <- as.factor(DATA$infection)
+levels(DATA$infection) <- labels
+
+PanelB <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
+    geom_boxplot() +
+    geom_jitter(aes(color = infection), position = position_jitterdodge(0.1, 0.1), alpha = 0.2) +
+    theme_classic() +
+    ylim(14, 28) +
+    labs(color = "Infection Type") +
+    ylab("Temperature (°C)") +
+    xlab("Infection Type") +
+    theme(
+        text = element_text(size = 15)
+    ) +
+    scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels)
+
+
+Fig1 <- plot_grid(PanelA, PanelB, labels = "AUTO", ncol = 2)
+
+ggsave("results/Figure1.pdf", Fig1, width = 8, height = 4)
+ggsave("results/Figure1.png", Fig1, width = 8, height = 4)
 
 
 DATA <- read_excel("data/Strunov_etal_WolbTP_2023_RawData.xlsx", sheet = "3rd instar_only 120h")
@@ -81,7 +95,7 @@ DATA$infection <- as.factor(DATA$infection)
 levels(DATA$infection) <- labels
 
 
-PanelB <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
+PLOT <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
     geom_boxplot() +
     geom_jitter(aes(color = infection), position = position_jitterdodge(0.1, 0.1), alpha = 0.2) +
     theme_classic() +
@@ -91,8 +105,3 @@ PanelB <- ggplot(DATA, aes(x = infection, y = temp, color = infection)) +
     xlab("Infection Type") +
     theme(text = element_text(size = 15)) +
     scale_color_manual(values = c("darkgrey", "firebrick3"), labels = labels)
-
-Fig1 <- plot_grid(PanelA, PanelB, labels = "AUTO", ncol = 2)
-
-ggsave("results/Figure1.pdf", Fig1, width = 8, height = 4)
-ggsave("results/Figure1.png", Fig1, width = 8, height = 4)
