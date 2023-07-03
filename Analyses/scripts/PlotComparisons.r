@@ -109,3 +109,4 @@ Fig4 <- plot_grid(DevPlot, HumPlot, FoodPlot, LightPlot,
 
 
 ggsave("results/Figure4.pdf", Fig4, width = 12, height = 8)
+ggsave("results/Figure4.png", Fig4, width = 12, height = 8)
