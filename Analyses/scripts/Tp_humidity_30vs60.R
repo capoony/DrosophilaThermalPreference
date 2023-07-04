@@ -16,7 +16,7 @@ DATA$humidity <- as.factor(DATA$humidity)
 summary(DATA)
 
 count(DATA, "infection")
-
+sink("results/stats/Humidity.txt")
 cat("**** Summary Table ****\n")
 
 means <- DATA %>%
@@ -24,7 +24,6 @@ means <- DATA %>%
   dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
 means
 
-sink("results/stats/Humidity.txt")
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))

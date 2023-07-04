@@ -1,3 +1,16 @@
+**** Summary Table ****
+# A tibble: 8 × 5
+# Groups:   infection [4]
+  infection gradient_machine  Mean    SD Median
+  <chr>     <chr>            <dbl> <dbl>  <dbl>
+1 w-        flat              18.3  2.78   18.3
+2 w-        tube              21.5  1.56   21.7
+3 w+        flat              18.6  2.56   18.8
+4 w+        tube              22.2  1.45   22.0
+5 w2+       flat              17.9  2.37   18.1
+6 w2+       tube              21.6  1.75   21.5
+7 w3+       flat              18.1  2.97   18.2
+8 w3+       tube              21.4  1.63   21.5
 
 **** Linear mixed model ****
 Linear mixed model fit by REML. t-tests use Satterthwaite's method [

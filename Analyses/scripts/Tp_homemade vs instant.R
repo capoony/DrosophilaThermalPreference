@@ -16,7 +16,7 @@ summary(DATA)
 
 count(DATA, "genotype")
 
-
+sink("results/stats/Food.txt")
 cat("**** Summary Table ****\n")
 
 means <- DATA %>%
@@ -24,7 +24,6 @@ means <- DATA %>%
   dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
 means
 
-sink("results/stats/Food.txt")
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))
