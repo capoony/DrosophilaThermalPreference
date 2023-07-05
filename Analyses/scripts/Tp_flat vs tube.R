@@ -18,6 +18,26 @@ summary(DATA)
 count(DATA, "infection")
 DATA2 <- filter(DATA, gradient_machine == "flat")
 
+
+## what about replicates?? Does it matter to remove clustered samples?
+
+means2 <- DATA2 %>%
+  group_by(RepID) %>%
+  dplyr::summarise(
+    Mean = mean(TempEst),
+    SD = sd(TempEst),
+    SE = SD / sqrt(n()),
+    Median = median(TempEst),
+    N = n(),
+    N90 = sum(TempEst < min(TempEst) + 2)
+  ) %>%
+  ## identify samples with more than 80% within 2°C from minimum where the median is < 20°C
+  filter(Median < 20 & N90 / N > 0.80)
+
+## remove those samples
+DATA3 <- DATA2 %>%
+  filter(!RepID %in% means2$RepID)
+
 cat("**** Summary Table ****\n")
 
 means <- DATA %>%
