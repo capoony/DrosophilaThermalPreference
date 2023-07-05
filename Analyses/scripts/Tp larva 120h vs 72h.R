@@ -25,6 +25,11 @@ means2 <- DATA %>%
   dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 means2
 
+median <- DATA %>%
+  group_by(infection, age_hours) %>%
+  dplyr::summarise(Median = median(temp), Mean = mean(temp))
+median
+
 
 cat("\n**** Linear mixed model ****\n")
 

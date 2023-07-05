@@ -26,6 +26,11 @@ means <- DATA %>%
   dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 means
 
+median <- DATA %>%
+  group_by(genotype, food) %>%
+  dplyr::summarise(Median = median(TempEst), Mean = mean(TempEst))
+median
+
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))

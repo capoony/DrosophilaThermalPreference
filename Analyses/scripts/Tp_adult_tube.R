@@ -27,6 +27,10 @@ means2 <- DATA %>%
   dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 means2
 
+median <- DATA %>%
+  group_by(infection) %>%
+  dplyr::summarise(Median = median(TempEst), Mean = mean(TempEst))
+median
 
 IQR(TempEst, infection)
 

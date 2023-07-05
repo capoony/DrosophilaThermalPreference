@@ -19,25 +19,19 @@ count(DATA, "infection")
 
 DATA$replica <- as.factor(DATA$replica)
 sink("results/stats/Larvae_120.txt")
-median <- DATA %>%
+
+mean <- DATA %>%
   group_by(infection, replica) %>%
   dplyr::summarise(Mean = mean(temp), SD = sd(temp), n = n()) %>%
   group_by(infection) %>%
   dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 
+mean
+
+median <- DATA %>%
+  group_by(infection) %>%
+  dplyr::summarise(Median = median(temp), Mean = mean(temp))
 median
-
-DATA.mod <- DATA %>%
-  group_by(infection, temp, replica) %>%
-  dplyr::summarise(n = n()) %>%
-  group_by(infection, replica) %>%
-  mutate(Freq = n / sum(n))
-
-means <- DATA.mod %>%
-  group_by(infection, temp) %>%
-  summarise(Mean = mean(Freq), SD = sd(Freq), SE = SD / sqrt(length(n)))
-means
-
 
 cat("\n**** Linear mixed model ****\n")
 

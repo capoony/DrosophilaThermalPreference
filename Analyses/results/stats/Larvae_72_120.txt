@@ -6,6 +6,14 @@
 2 w-        72h        22.5  2.15   162     3
 3 wMelCS    120h       20.2  2.59   295     5
 4 wMelCS    72h        21.9  1.97   119     3
+# A tibble: 4 × 4
+# Groups:   infection [2]
+  infection age_hours Median  Mean
+  <chr>     <fct>      <dbl> <dbl>
+1 w-        120h          19  19.8
+2 w-        72h           23  22.4
+3 wMelCS    120h          19  20.2
+4 wMelCS    72h           22  22.0
 
 **** Linear mixed model ****
 Generalized linear mixed model fit by maximum likelihood (Laplace
