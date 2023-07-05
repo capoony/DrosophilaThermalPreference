@@ -1,29 +1,49 @@
+# A tibble: 2 × 5
+  infection  Mean    SD     n   Rep
+  <chr>     <dbl> <dbl> <int> <int>
+1 w-         19.0  2.34   332     5
+2 w+         18.7  2.48   529     5
+# A tibble: 26 × 5
+# Groups:   infection [2]
+   infection  temp   Mean     SD     SE
+   <chr>     <dbl>  <dbl>  <dbl>  <dbl>
+ 1 w-           16 0.194  0.156  0.0899
+ 2 w-           17 0.280  0.142  0.0634
+ 3 w-           18 0.194  0.102  0.0457
+ 4 w-           19 0.0906 0.0342 0.0153
+ 5 w-           20 0.0683 0.0829 0.0414
+ 6 w-           21 0.0489 0.0339 0.0152
+ 7 w-           22 0.0609 0.0410 0.0183
+ 8 w-           23 0.0617 0.0488 0.0218
+ 9 w-           24 0.0682 0.0549 0.0274
+10 w-           25 0.0417 0.0297 0.0171
+# … with 16 more rows
+# ℹ Use `print(n = ...)` to see more rows
 
 **** Linear mixed model ****
 Generalized linear mixed model fit by maximum likelihood (Laplace
   Approximation) [glmerMod]
  Family: poisson  ( log )
-Formula: temp ~ infection + (1 | replica/infection) + (1 | time)
+Formula: temp ~ infection + (1 | replica) + (1 | time)
    Data: DATA
 
      AIC      BIC   logLik deviance df.resid 
-  4405.6   4429.4  -2197.8   4395.6      856 
+  4403.6   4422.7  -2197.8   4395.6      857 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
 -0.9601 -0.3792 -0.1153  0.4055  2.5930 
 
 Random effects:
- Groups            Name        Variance Std.Dev.
- infection:replica (Intercept) 0.000000 0.00000 
- replica           (Intercept) 0.002789 0.05281 
- time              (Intercept) 0.000000 0.00000 
-Number of obs: 861, groups:  infection:replica, 10; replica, 5; time, 4
+ Groups  Name        Variance Std.Dev.
+ replica (Intercept) 0.002789 0.05281 
+ time    (Intercept) 0.000000 0.00000 
+Number of obs: 861, groups:  replica, 5; time, 4
 
 Fixed effects:
             Estimate Std. Error z value Pr(>|z|)    
-(Intercept) 2.934813   0.025050 117.158   <2e-16 ***
-infection1  0.007110   0.008152   0.872    0.383    
+(Intercept) 2.934812   0.025050 117.158   <2e-16 ***
+infection1  0.007109   0.008152   0.872    0.383    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -35,8 +55,8 @@ boundary (singular) fit: see help('isSingular')
 
 Data: DATA
 Models:
-LMM1.null: temp ~ (1 | replica/infection) + (1 | time)
-LMM1: temp ~ infection + (1 | replica/infection) + (1 | time)
+LMM1.null: temp ~ (1 | replica) + (1 | time)
+LMM1: temp ~ infection + (1 | replica) + (1 | time)
           npar    AIC    BIC  logLik deviance  Chisq Df Pr(>Chisq)
-LMM1.null    4 4404.4 4423.4 -2198.2   4396.4                     
-LMM1         5 4405.6 4429.4 -2197.8   4395.6 0.7597  1     0.3834
+LMM1.null    3 4402.4 4416.7 -2198.2   4396.4                     
+LMM1         4 4403.6 4422.7 -2197.8   4395.6 0.7597  1     0.3834

@@ -16,27 +16,21 @@ DATA$exp_date <- as.factor(DATA$exp_date)
 summary(DATA)
 
 count(DATA, "infection")
-
+sink("results/stats/Adult_tube.txt")
 cat("**** Summary Table ****\n")
 
-means <- DATA %>%
-  group_by(infection) %>%
-  dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
-means
 
 means2 <- DATA %>%
   group_by(infection, replica) %>%
-  dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
+  dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), n = n()) %>%
+  group_by(infection) %>%
+  dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 means2
 
-means3 <- means2 %>%
-  group_by(infection) %>%
-  dplyr::summarise(SD = sd(Median))
-means3
 
 IQR(TempEst, infection)
 
-sink("results/stats/Adult_tube.txt")
+
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))

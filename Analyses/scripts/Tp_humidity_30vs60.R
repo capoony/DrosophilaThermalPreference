@@ -20,8 +20,10 @@ sink("results/stats/Humidity.txt")
 cat("**** Summary Table ****\n")
 
 means <- DATA %>%
-  group_by(infection, humidity) %>%
-  dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
+  group_by(infection, humidity, replica) %>%
+  dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst)) %>%
+  group_by(infection, humidity, replica) %>%
+  dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 means
 
 cat("\n**** Linear mixed model ****\n")

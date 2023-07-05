@@ -1,3 +1,36 @@
+# A tibble: 2 × 5
+  infection  Mean    SD     n   Rep
+  <chr>     <dbl> <dbl> <int> <int>
+1 w-         20.4  1.80   142     5
+2 w+         20.7  1.76   192     5
+# A tibble: 19 × 5
+# Groups:   infection [2]
+   infection  temp   Mean       SD       SE
+   <chr>     <dbl>  <dbl>    <dbl>    <dbl>
+ 1 w-           18 0.198   0.211    0.0945 
+ 2 w-           19 0.136   0.0230   0.0103 
+ 3 w-           20 0.294   0.205    0.103  
+ 4 w-           21 0.189   0.115    0.0514 
+ 5 w-           22 0.156   0.0752   0.0434 
+ 6 w-           23 0.110   0.108    0.0482 
+ 7 w-           24 0.0374  0.0172   0.00993
+ 8 w-           26 0.0286 NA       NA      
+ 9 w-           27 0.0271  0.00207  0.00147
+10 w+           18 0.238   0.251    0.125  
+11 w+           19 0.145   0.0899   0.0402 
+12 w+           20 0.141   0.104    0.0467 
+13 w+           21 0.174   0.128    0.0574 
+14 w+           22 0.217   0.0561   0.0281 
+15 w+           23 0.103   0.0591   0.0264 
+16 w+           24 0.0488  0.0465   0.0329 
+17 w+           25 0.0882  0.0416   0.0294 
+18 w+           26 0.0294 NA       NA      
+19 w+           27 0.0588 NA       NA      
+# A tibble: 2 × 4
+  infection  Mean    SD Median
+  <chr>     <dbl> <dbl>  <dbl>
+1 w-         20.4  1.85     20
+2 w+         20.6  1.91     21
 
 **** Linear mixed model ****
 Generalized linear mixed model fit by maximum likelihood (Laplace

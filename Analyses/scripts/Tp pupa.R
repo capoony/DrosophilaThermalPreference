@@ -18,10 +18,12 @@ summary(DATA)
 count(DATA, "infection")
 
 DATA$replica <- as.factor(DATA$replica)
-
+sink("results/stats/Pupae.txt")
 median <- DATA %>%
+  group_by(infection, replica) %>%
+  dplyr::summarise(Mean = mean(temp), SD = sd(temp), n = n()) %>%
   group_by(infection) %>%
-  summarise(Median = median(temp), Mean = mean(temp), SD = sd(temp), SE = SD / sqrt(length(n)))
+  dplyr::summarise(Mean = mean(Mean), SD = mean(SD), n = sum(n), Rep = n())
 median
 
 DATA.mod <- DATA %>%
@@ -40,7 +42,7 @@ means2 <- DATA %>%
   dplyr::summarise(Mean = mean(temp), SD = sd(temp), Median = median(temp))
 means2
 
-sink("results/stats/Pupae.txt")
+
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))

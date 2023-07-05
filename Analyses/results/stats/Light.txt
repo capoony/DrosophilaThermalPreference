@@ -1,12 +1,12 @@
 **** Summary Table ****
-# A tibble: 4 × 5
+# A tibble: 4 × 6
 # Groups:   light [2]
-  light infection  Mean    SD Median
-  <chr> <chr>     <dbl> <dbl>  <dbl>
-1 off   w-         21.6  1.69   21.6
-2 off   w2+        22.6  2.33   22.4
-3 on    w-         22.0  2.37   21.9
-4 on    w2+        22.1  2.87   21.9
+  light infection  Mean    SD     n   Rep
+  <chr> <chr>     <dbl> <dbl> <int> <int>
+1 off   w-         21.6  1.47   211     4
+2 off   w2+        22.3  1.99   243     4
+3 on    w-         22.0  2.27   159     3
+4 on    w2+        22.1  2.34   193     3
 
 **** Linear mixed model ****
 Linear mixed model fit by REML. t-tests use Satterthwaite's method [
