@@ -16,7 +16,7 @@ DATA$replica <- as.factor(DATA$replica)
 summary(DATA)
 
 count(DATA, "infection")
-
+sink("results/stats/Light.txt")
 cat("**** Summary Table ****\n")
 
 means <- DATA %>%
@@ -24,7 +24,7 @@ means <- DATA %>%
   dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
 means
 
-sink("results/stats/Light.txt")
+
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))

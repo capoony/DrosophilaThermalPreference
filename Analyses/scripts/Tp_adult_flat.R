@@ -14,7 +14,7 @@ DATA <- read_excel("data/Strunov_etal_WolbTP_2023_RawData.xlsx", sheet = "adult_
 DATA$replica <- as.factor(DATA$replica)
 DATA$exp_date <- as.factor(DATA$exp_date)
 summary(DATA)
-
+sink("results/stats/Adult_flat.txt")
 cat("**** Summary Table ****\n")
 
 means <- DATA %>%
@@ -22,7 +22,7 @@ means <- DATA %>%
   dplyr::summarise(Mean = mean(TempEst), SD = sd(TempEst), Median = median(TempEst))
 means
 
-sink("results/stats/Adult_flat.txt")
+
 cat("\n**** Linear mixed model ****\n")
 
 options(contrasts = c("contr.sum", "contr.poly"))
